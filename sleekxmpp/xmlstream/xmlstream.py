@@ -1618,6 +1618,7 @@ class XMLStream(object):
             return
 
         log.debug("RECV: %s", stanza)
+        self.recv_callback(stanza)
 
         # Match the stanza against registered handlers. Handlers marked
         # to run "in stream" will be executed immediately; the rest will
@@ -1642,6 +1643,10 @@ class XMLStream(object):
         # handler will be executed immediately for this case.
         if unhandled:
             stanza.unhandled()
+
+    def recv_callback(self, stanza):
+        #log.debug("[recv_callback] NOT IMPLEMENTED: " + stanza.name)
+        pass
 
     def _threaded_event_wrapper(self, func, args):
         """Capture exceptions for event handlers that run
